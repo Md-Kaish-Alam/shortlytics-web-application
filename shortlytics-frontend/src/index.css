@@ -2,3 +2,53 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 @import "tailwindcss";
+
+/* ========== THEME VARIABLES ========== */
+@theme {
+  /* Colors */
+  --color-navbar: #ffffff;
+  --color-btn: #3364F7;
+  --color-link: #2a5bd7;
+
+  /* Fonts */
+  --font-roboto: "Roboto", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+
+  /* Shadows */
+  --shadow-custom: 0 0 15px rgba(0, 0, 0, 0.3);
+  --shadow-right: 10px 0px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== CUSTOM UTILITIES ========== */
+
+/* Background gradients */
+@utility bg-custom-gradient {
+  background-image: linear-gradient(to right, #3b82f6, #9333ea);
+}
+@utility bg-custom-gradient-2 {
+  background-image: linear-gradient(to left, #3b82f6, #f43f5e);
+}
+@utility bg-card-gradient {
+  background-image: linear-gradient(to right, #38b2ac, #4299e1);
+}
+
+/* Buttons */
+@utility btn-primary {
+  background-color: var(--color-btn);
+  color: white;
+  border-radius: 0.375rem; /* rounded-md */
+  padding: 0.5rem 1rem;    /* py-2 px-4 */
+}
+@utility btn-outline {
+  border: 1px solid var(--color-btn);
+  color: var(--color-btn);
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Navbar */
+@utility navbar {
+  background-color: var(--color-navbar);
+  box-shadow: var(--shadow-custom);
+  padding: 0.75rem 1.5rem; /* py-3 px-6 */
+}
