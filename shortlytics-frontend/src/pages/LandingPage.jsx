@@ -1,15 +1,16 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
 
 import Card from "../components/Card";
-import { useNavigate } from "react-router-dom";
+import { useStoreContext } from "../hooks/useStoreContext";
 
 let description =
   "Shortlytics is a fast, secure, and intuitive URL shortening platform designed for effortless link management. Create short, memorable URLs in seconds, track performance with detailed analytics, and safeguard your data with advanced security measures. With lightning-fast redirects and reliable uptime, Shortlytics ensures a seamless experience for both you and your audience.";
 
 const LandingPage = () => {
-
   const navigate = useNavigate();
+  const { token } = useStoreContext();
 
   const dashboardNavigationHandler = () => {};
 
