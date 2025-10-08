@@ -2,16 +2,17 @@ import { useState } from "react";
 import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useStoreContext } from "../hooks/useStoreContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const path = useLocation().pathname;
+  const { token, setToken } = useStoreContext();
 
-  const token = "";
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   const onLogOutHandler = () => {
-    // setToken(null);
+    setToken(null);
     localStorage.removeItem("JWT_TOKEN");
     navigate("/login");
   };
@@ -75,7 +76,7 @@ const Navbar = () => {
           {token && (
             <button
               onClick={onLogOutHandler}
-              className="sm:ml-0 -ml-1 bg-rose-700 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150"
+              className="sm:ml-0 -ml-1 bg-red-500 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150"
             >
               LogOut
             </button>

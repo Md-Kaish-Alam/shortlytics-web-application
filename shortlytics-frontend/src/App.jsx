@@ -6,12 +6,14 @@ import {
 } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-import LandingPage from "./pages/LandingPage";
 import AboutPage from "./pages/AboutPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import LandingPage from "./pages/LandingPage";
+import RegisterPage from "./pages/RegisterPage";
+
+import DashboardLayout from "./components/Dashboard/DashboardLayout";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -41,6 +43,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/dashboard" element={<DashboardLayout />} />
           </Routes>
         </Layout>
       </Router>
