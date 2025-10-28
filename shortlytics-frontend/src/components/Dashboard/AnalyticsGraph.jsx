@@ -21,7 +21,6 @@ ChartJS.register(
 const AnalyticsGraph = ({ analyticsData }) => {
   const labels = analyticsData?.map((item) => `${item.clickDate}`);
   const userPerData = analyticsData?.map((item) => item.count);
-  console.log({ analyticsData });
   const data = {
     labels:
       analyticsData?.length > 0

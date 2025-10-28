@@ -2,7 +2,6 @@ import { useState } from "react";
 import { FaLink } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-import Graph from "./Graph";
 import Loader from "../Loader";
 import ShortUrlsList from "./ShortUrlsList";
 import CreateShortUrlPopup from "./CreateShortUrlPopup";

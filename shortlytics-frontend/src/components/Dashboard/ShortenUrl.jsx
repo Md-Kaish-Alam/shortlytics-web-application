@@ -11,7 +11,7 @@ import AnalyticsGraph from "./AnalyticsGraph";
 import api from "../../api/api";
 import { useStoreContext } from "../../hooks/useStoreContext";
 
-const subDomain = import.meta.env.VITE_REACT_FRONT_END_URL.replace(
+const subDomain = import.meta.env.VITE_REACT_SUBDOMAIN.replace(
   /^https?:\/\//,
   ""
 );
@@ -68,9 +68,7 @@ const ShortenUrl = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
             <Link
               target="_"
               className="flex justify-center items-center gap-2 text-[17px] font-montserrat font-[600] text-link"
-              to={
-                import.meta.env.VITE_REACT_FRONT_END_URL + "/s/" + `${shortUrl}`
-              }
+              to={import.meta.env.VITE_REACT_SUBDOMAIN + "/s/" + `${shortUrl}`}
             >
               {subDomain + "/s/" + `${shortUrl}`}
               <FaExternalLinkAlt className="text-link" />
@@ -111,7 +109,7 @@ const ShortenUrl = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
               setTimeout(() => setIsCopied(false), 2000);
             }}
             text={`${
-              import.meta.env.VITE_REACT_FRONT_END_URL + "/s/" + `${shortUrl}`
+              import.meta.env.VITE_REACT_SUBDOMAIN + "/s/" + `${shortUrl}`
             }`}
           >
             <div className="flex cursor-pointer gap-1 items-center bg-btn py-2 font-semibold shadow-md shadow-slate-500 px-6 rounded-md text-white">
