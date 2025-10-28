@@ -21,7 +21,9 @@ function Layout({ children }) {
   // pages where you don't want Navbar and Footer
   const hideLayout = ["/register", "/login"];
 
-  const shouldHideLayout = hideLayout.includes(location.pathname);
+  const shouldHideLayout =
+    hideLayout.includes(location.pathname) ||
+    location.pathname.startsWith("/s/");
 
   return (
     <>

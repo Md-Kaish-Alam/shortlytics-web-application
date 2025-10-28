@@ -41,3 +41,26 @@ export const useFetchTotalClicks = (token, onError) => {
     staleTime: 5000,
   });
 };
+
+export const useFetchShortUrls = (token, onError) => {
+  return useQuery({
+    queryKey: ["shortUrls"],
+    queryFn: async () => {
+      return await api.get("/api/urls/my-urls", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    },
+    select: (data) => {
+      const sortedData = data.data.sort(
+        (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+      );
+      return sortedData;
+    },
+    onError,
+    staleTime: 5000,
+  });
+};

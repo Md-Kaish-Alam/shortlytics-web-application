@@ -1,20 +1,35 @@
+import { useState } from "react";
 import { FaLink } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import Graph from "./Graph";
 import Loader from "../Loader";
-import { useFetchTotalClicks } from "../../hooks/useQuery";
+import ShortUrlsList from "./ShortUrlsList";
+import CreateShortUrlPopup from "./CreateShortUrlPopup";
+
 import { useStoreContext } from "../../hooks/useStoreContext";
+import { useFetchShortUrls, useFetchTotalClicks } from "../../hooks/useQuery";
+import AnalyticsGraph from "./AnalyticsGraph";
 
 const DashboardLayout = () => {
   const { token } = useStoreContext();
   const navigate = useNavigate();
+
+  const [showPopUp, setShowPopUp] = useState(false);
+
   function onError() {
     console.log("Error fetching total clicks");
     navigate("/error");
   }
 
+  const {
+    isLoadingShortUrls,
+    data: shortUrls,
+    refetch,
+  } = useFetchShortUrls(token, onError);
+
   const { isLoading, data: totalClicks } = useFetchTotalClicks(token, onError);
+
   return (
     <div className="lg:px-14 sm:px-8 px-4 min-h-[calc(100vh-64px)]">
       {isLoading ? (
@@ -33,25 +48,37 @@ const DashboardLayout = () => {
                 </h3>
               </div>
             )}
-            <Graph graphData={totalClicks} />
+            <AnalyticsGraph analyticsData={totalClicks} />
           </div>
           <div className="py-5 sm:text-end text-center">
-            <button className="bg-custom-gradient px-4 py-2 rounded-md text-white">
+            <button
+              className="bg-custom-gradient px-4 py-2 rounded-md text-white"
+              onClick={() => setShowPopUp(true)}
+            >
               Create New Short URL
             </button>
           </div>
           <div>
-            <div className="flex justify-center pt-16">
-              <div className="flex gap-2 items-center justify-center py-6 sm:px-8 px-5 rounded-md shadow-lg bg-gray-50">
-                <h1 className="text-slate-800 font-montserrat sm:text-[18px] text-[14px] font-semibold mb-1">
-                  You haven&apos;t created any short link yet.
-                </h1>
-                <FaLink className="text-blue-500 sm:text-xl text-sm" />
+            {!isLoadingShortUrls && shortUrls.length === 0 ? (
+              <div className="flex justify-center pt-16">
+                <div className="flex gap-2 items-center justify-center py-6 sm:px-8 px-5 rounded-md shadow-lg bg-gray-50">
+                  <h1 className="text-slate-800 font-montserrat sm:text-[18px] text-[14px] font-semibold mb-1">
+                    You haven&apos;t created any short link yet.
+                  </h1>
+                  <FaLink className="text-blue-500 sm:text-xl text-sm" />
+                </div>
               </div>
-            </div>
+            ) : (
+              <ShortUrlsList data={shortUrls} />
+            )}
           </div>
         </div>
       )}
+      <CreateShortUrlPopup
+        refetch={refetch}
+        open={showPopUp}
+        setOpen={setShowPopUp}
+      />
     </div>
   );
 };

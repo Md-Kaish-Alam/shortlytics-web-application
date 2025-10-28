@@ -1,4 +1,3 @@
-import React from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -19,24 +18,24 @@ ChartJS.register(
   Filler
 );
 
-const Graph = ({ graphData }) => {
-  const labels = graphData?.map((item) => `${item.clickDate}`);
-  const userPerDaya = graphData?.map((item) => item.count);
-
+const AnalyticsGraph = ({ analyticsData }) => {
+  const labels = analyticsData?.map((item) => `${item.clickDate}`);
+  const userPerData = analyticsData?.map((item) => item.count);
+  console.log({ analyticsData });
   const data = {
     labels:
-      graphData.length > 0
+      analyticsData?.length > 0
         ? labels
         : ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
     datasets: [
       {
         label: "Total Clicks",
         data:
-          graphData.length > 0
-            ? userPerDaya
+          analyticsData?.length > 0
+            ? userPerData
             : [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1],
         backgroundColor:
-          graphData.length > 0 ? "#3b82f6" : "rgba(54, 162, 235, 0.1)",
+          analyticsData?.length > 0 ? "#3b82f6" : "rgba(54, 162, 235, 0.1)",
         borderColor: "#1D2327",
         pointBorderColor: "red",
         fill: true,
@@ -98,7 +97,7 @@ const Graph = ({ graphData }) => {
     },
   };
 
-  return <Bar className=" w-full" data={data} options={options}></Bar>;
+  return <Bar className="w-full" data={data} options={options}></Bar>;
 };
 
-export default Graph;
+export default AnalyticsGraph;
