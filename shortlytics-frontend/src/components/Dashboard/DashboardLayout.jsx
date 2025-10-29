@@ -17,8 +17,7 @@ const DashboardLayout = () => {
   const [showPopUp, setShowPopUp] = useState(false);
 
   function onError() {
-    console.log("Error fetching total clicks");
-    navigate("/error");
+    navigate("/error/unable-to-fetch-data");
   }
 
   const {

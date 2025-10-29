@@ -10,6 +10,8 @@ import ShortenUrlPage from "./pages/ShortenUrlPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import DashboardLayout from "./components/Dashboard/DashboardLayout";
+import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "./pages/ErrorPage";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -34,11 +36,34 @@ const AppRouter = () => {
     <Layout>
       <Toaster position="bottom-center" />
       <Routes>
+        <Route path="*" element={<ErrorPage />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<DashboardLayout />} />
+        <Route path="/error/:message" element={<ErrorPage />} />
+        <Route
+          path="/login"
+          element={
+            <PrivateRoute publicPage={true}>
+              <LoginPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <PrivateRoute publicPage={true}>
+              <RegisterPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute publicPage={false}>
+              <DashboardLayout />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Layout>
   );

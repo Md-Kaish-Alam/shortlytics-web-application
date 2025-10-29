@@ -1,8 +1,9 @@
 import { FaExclamationTriangle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const ErrorPage = ({ message }) => {
+const ErrorPage = () => {
   const navigate = useNavigate();
+  const { message } = useParams();
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] bg-gray-100 p-6">
       <FaExclamationTriangle className="text-red-500 text-6xl mb-4" />

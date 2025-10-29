@@ -50,8 +50,7 @@ const ShortenUrl = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
           setAnalyticsData(data);
           setSelectedUrl("");
         } catch (error) {
-          navigate("/error");
-          console.error("Error fetching analytics data:", error);
+          navigate(`/error/${error.message}`);
         } finally {
           setIsLoading(false);
         }
